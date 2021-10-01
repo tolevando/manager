@@ -141,7 +141,7 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
                           ),
                         )),
                         Container(
-                          padding: EdgeInsets.fromLTRB(40, 2, 40, 20),
+                          padding: EdgeInsets.fromLTRB(30, 2, 30, 20),
                           child: Text(
                             "Delivery Ativo",
                             style: TextStyle(
