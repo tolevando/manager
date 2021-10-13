@@ -28,7 +28,8 @@ class OrderWidget extends StatefulWidget {
   }
 }
 
-class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderStateMixin {
+class _OrderWidgetState extends StateMVC<OrderWidget>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
   int _tabIndex = 0;
   OrderController _con;
@@ -40,8 +41,9 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
   @override
   void initState() {
     _con.listenForOrder(id: widget.routeArgument.id);
-    _tabController = TabController(length: 2, initialIndex: _tabIndex, vsync: this);
-    _tabController.addListener(_handleTabSelection);    
+    _tabController =
+        TabController(length: 2, initialIndex: _tabIndex, vsync: this);
+    _tabController.addListener(_handleTabSelection);
 
     super.initState();
   }
@@ -59,10 +61,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
     }
   }
 
-
-  void callbackDispatcher(){
-    
-  }
+  void callbackDispatcher() {}
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +74,15 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-                  boxShadow: [BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.15), offset: Offset(0, -2), blurRadius: 5.0)]),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Theme.of(context).focusColor.withOpacity(0.15),
+                        offset: Offset(0, -2),
+                        blurRadius: 5.0)
+                  ]),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width - 40,
               ),
@@ -86,8 +92,15 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-                  boxShadow: [BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.15), offset: Offset(0, -2), blurRadius: 5.0)]),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Theme.of(context).focusColor.withOpacity(0.15),
+                        offset: Offset(0, -2),
+                        blurRadius: 5.0)
+                  ]),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width - 40,
                 child: Column(
@@ -102,7 +115,9 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
-                        Helper.getPrice(Helper.getSubTotalOrdersPrice(_con.order), context, style: Theme.of(context).textTheme.subtitle1)
+                        Helper.getPrice(
+                            Helper.getSubTotalOrdersPrice(_con.order), context,
+                            style: Theme.of(context).textTheme.subtitle1)
                       ],
                     ),
                     SizedBox(height: 5),
@@ -114,7 +129,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
-                        Helper.getPrice(_con.order.deliveryFee, context, style: Theme.of(context).textTheme.subtitle1)
+                        Helper.getPrice(_con.order.deliveryFee, context,
+                            style: Theme.of(context).textTheme.subtitle1)
                       ],
                     ),
                     Row(
@@ -125,7 +141,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
-                        Helper.getPrice(Helper.getTaxOrder(_con.order), context, style: Theme.of(context).textTheme.subtitle1)
+                        Helper.getPrice(Helper.getTaxOrder(_con.order), context,
+                            style: Theme.of(context).textTheme.subtitle1)
                       ],
                     ),
                     Divider(height: 20),
@@ -137,10 +154,14 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
-                        Helper.getPrice(Helper.getTotalOrdersPrice(_con.order), context, style: Theme.of(context).textTheme.headline6)
+                        Helper.getPrice(
+                            Helper.getTotalOrdersPrice(_con.order), context,
+                            style: Theme.of(context).textTheme.headline6)
                       ],
                     ),
-                    _con.order.orderStatus.id != '5' ? Divider(height: 25) : SizedBox(height: 0),
+                    _con.order.orderStatus.id != '5'
+                        ? Divider(height: 25)
+                        : SizedBox(height: 0),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: Wrap(
@@ -149,14 +170,19 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                           if (_con.order.canEditOrder())
                             OutlineButton(
                               onPressed: () {
-                                Navigator.of(context).pushNamed('/OrderEdit', arguments: RouteArgument(id: _con.order.id));
+                                Navigator.of(context).pushNamed('/OrderEdit',
+                                    arguments:
+                                        RouteArgument(id: _con.order.id));
                               },
                               padding: EdgeInsets.symmetric(vertical: 10),
                               textColor: Theme.of(context).accentColor,
-                              disabledTextColor: Theme.of(context).focusColor.withOpacity(0.5),
-                              highlightedBorderColor: Theme.of(context).accentColor,
+                              disabledTextColor:
+                                  Theme.of(context).focusColor.withOpacity(0.5),
+                              highlightedBorderColor:
+                                  Theme.of(context).accentColor,
                               shape: StadiumBorder(),
-                              borderSide: BorderSide(color: Theme.of(context).accentColor),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).accentColor),
                               child: Text(
                                 S.of(context).edit,
                               ),
@@ -174,20 +200,27 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                           title: Wrap(
                                             spacing: 10,
                                             children: <Widget>[
-                                              Icon(Icons.report, color: Colors.orange),
+                                              Icon(Icons.report,
+                                                  color: Colors.orange),
                                               Text(
                                                 S.of(context).confirmation,
-                                                style: TextStyle(color: Colors.orange),
+                                                style: TextStyle(
+                                                    color: Colors.orange),
                                               ),
                                             ],
                                           ),
-                                          content: Text(S.of(context).areYouSureYouWantToCancelThisOrderOf),
-                                          contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                                          content: Text(S
+                                              .of(context)
+                                              .areYouSureYouWantToCancelThisOrderOf),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 25),
                                           actions: <Widget>[
                                             FlatButton(
                                               child: new Text(
                                                 S.of(context).yes,
-                                                style: TextStyle(color: Theme.of(context).hintColor),
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .hintColor),
                                               ),
                                               onPressed: () {
                                                 _con.doCancelOrder(_con.order);
@@ -197,7 +230,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                             FlatButton(
                                               child: new Text(
                                                 S.of(context).close,
-                                                style: TextStyle(color: Colors.orange),
+                                                style: TextStyle(
+                                                    color: Colors.orange),
                                               ),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
@@ -210,10 +244,13 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                   },
                             padding: EdgeInsets.symmetric(vertical: 10),
                             textColor: Theme.of(context).accentColor,
-                            disabledTextColor: Theme.of(context).focusColor.withOpacity(0.5),
-                            highlightedBorderColor: Theme.of(context).accentColor,
+                            disabledTextColor:
+                                Theme.of(context).focusColor.withOpacity(0.5),
+                            highlightedBorderColor:
+                                Theme.of(context).accentColor,
                             shape: StadiumBorder(),
-                            borderSide: BorderSide(color: Theme.of(context).accentColor),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).accentColor),
                             child: Text(
                               S.of(context).cancel,
                             ),
@@ -234,19 +271,25 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                 floating: true,
                 automaticallyImplyLeading: false,
                 leading: new IconButton(
-                  icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
+                  icon:
+                      new Icon(Icons.sort, color: Theme.of(context).hintColor),
                   onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
                 ),
                 centerTitle: true,
                 title: Text(
                   S.of(context).order_details,
-                  style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .merge(TextStyle(letterSpacing: 1.3)),
                 ),
                 actions: <Widget>[
-                  new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+                  new ShoppingCartButtonWidget(
+                      iconColor: Theme.of(context).hintColor,
+                      labelColor: Theme.of(context).accentColor),
                 ],
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                expandedHeight: 230,
+                expandedHeight: 245,
                 elevation: 0,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
@@ -255,7 +298,11 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       boxShadow: [
-                        BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.1), blurRadius: 5, offset: Offset(0, 2)),
+                        BoxShadow(
+                            color:
+                                Theme.of(context).focusColor.withOpacity(0.1),
+                            blurRadius: 5,
+                            offset: Offset(0, 2)),
                       ],
                     ),
                     child: Row(
@@ -271,24 +318,31 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      S.of(context).order_id + ": #${_con.order.id}",
+                                      S.of(context).order_id +
+                                          ": #${_con.order.id}",
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
-                                      style: Theme.of(context).textTheme.headline4,
+                                      style:
+                                          Theme.of(context).textTheme.headline4,
                                     ),
                                     Text(
                                       _con.order.orderStatus.status,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
-                                      style: Theme.of(context).textTheme.caption,
+                                      style:
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                     Text(
-                                      DateFormat('dd/MM/yyyy HH:mm').format(_con.order.dateTime),
-                                      style: Theme.of(context).textTheme.caption,
+                                      DateFormat('dd/MM/yyyy HH:mm')
+                                          .format(_con.order.dateTime),
+                                      style:
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                     Text(
-                                      "Observação: "+_con.order.observacao??'-',
-                                      style: Theme.of(context).textTheme.caption,
+                                      "Observação: " + _con.order.observacao ??
+                                          '-',
+                                      style:
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                   ],
                                 ),
@@ -298,19 +352,30 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
-                                  Helper.getPrice(Helper.getTotalOrdersPrice(_con.order), context, style: Theme.of(context).textTheme.headline4),
+                                  Helper.getPrice(
+                                      Helper.getTotalOrdersPrice(_con.order),
+                                      context,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4),
                                   Text(
-                                    _con.order.payment?.method ?? S.of(context).cash_on_delivery,
+                                    _con.order.payment?.method ??
+                                        S.of(context).cash_on_delivery,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                     style: Theme.of(context).textTheme.caption,
                                   ),
                                   Text(
-                                      "Troco para: "+_con.order.troco_para??'-',
-                                      style: Theme.of(context).textTheme.caption,                                      
-                                    ),
+                                    "Troco para: " + _con.order.troco_para ??
+                                        '-',
+                                    style: Theme.of(context).textTheme.caption,
+                                  ),
                                   Text(
-                                    S.of(context).items + ':' + _con.order.productOrders?.length?.toString() ?? 0,
+                                    S.of(context).items +
+                                            ':' +
+                                            _con.order.productOrders?.length
+                                                ?.toString() ??
+                                        0,
                                     style: Theme.of(context).textTheme.caption,
                                   ),
                                 ],
@@ -329,13 +394,20 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                     labelPadding: EdgeInsets.symmetric(horizontal: 10),
                     unselectedLabelColor: Theme.of(context).accentColor,
                     labelColor: Theme.of(context).primaryColor,
-                    indicator: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Theme.of(context).accentColor),
+                    indicator: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Theme.of(context).accentColor),
                     tabs: [
                       Tab(
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50), border: Border.all(color: Theme.of(context).accentColor.withOpacity(0.2), width: 1)),
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(
+                                  color: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(0.2),
+                                  width: 1)),
                           child: Align(
                             alignment: Alignment.center,
                             child: Text(S.of(context).ordered_products),
@@ -346,7 +418,12 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50), border: Border.all(color: Theme.of(context).accentColor.withOpacity(0.2), width: 1)),
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(
+                                  color: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(0.2),
+                                  width: 1)),
                           child: Align(
                             alignment: Alignment.center,
                             child: Text(S.of(context).customer),
@@ -369,7 +446,11 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                         return SizedBox(height: 15);
                       },
                       itemBuilder: (context, index) {
-                        return ProductOrderItemWidget(heroTag: 'my_orders', order: _con.order, productOrder: _con.order.productOrders.elementAt(index));
+                        return ProductOrderItemWidget(
+                            heroTag: 'my_orders',
+                            order: _con.order,
+                            productOrder:
+                                _con.order.productOrders.elementAt(index));
                       },
                     ),
                   ),
@@ -379,7 +460,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                       children: <Widget>[
                         SizedBox(height: 20),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 7),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -390,11 +472,13 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                     Text(
                                       S.of(context).fullName,
                                       overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(context).textTheme.caption,
+                                      style:
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                     Text(
                                       _con.order.user.name,
-                                      style: Theme.of(context).textTheme.bodyText1,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
                                   ],
                                 ),
@@ -405,9 +489,12 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                 height: 42,
                                 child: FlatButton(
                                   padding: EdgeInsets.all(0),
-                                  disabledColor: Theme.of(context).focusColor.withOpacity(0.4),
+                                  disabledColor: Theme.of(context)
+                                      .focusColor
+                                      .withOpacity(0.4),
                                   onPressed: () {
-                                    Market _market = _con.order.productOrders[0].product.market;
+                                    Market _market = _con
+                                        .order.productOrders[0].product.market;
                                     List<User> _users = _market.users
                                         .map((e) {
                                           e.image = _market.image;
@@ -416,7 +503,10 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                         .toSet()
                                         .toList();
                                     _users.insert(0, _con.order.user);
-                                    Navigator.of(context).pushNamed('/Chat', arguments: RouteArgument(param: new Conversation(_users, name: _market.name)));
+                                    Navigator.of(context).pushNamed('/Chat',
+                                        arguments: RouteArgument(
+                                            param: new Conversation(_users,
+                                                name: _market.name)));
                                   },
                                   //onPressed: () {
 //                                    Navigator.of(context).pushNamed('/Profile',
@@ -427,7 +517,9 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                     color: Theme.of(context).primaryColor,
                                     size: 24,
                                   ),
-                                  color: Theme.of(context).accentColor.withOpacity(0.9),
+                                  color: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(0.9),
                                   shape: StadiumBorder(),
                                 ),
                               ),
@@ -435,7 +527,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 7),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -446,11 +539,16 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                     Text(
                                       S.of(context).deliveryAddress,
                                       overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(context).textTheme.caption,
+                                      style:
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                     Text(
-                                      _con.order.deliveryAddress?.address ?? S.of(context).address_not_provided_please_call_the_client,
-                                      style: Theme.of(context).textTheme.bodyText1,
+                                      _con.order.deliveryAddress?.address ??
+                                          S
+                                              .of(context)
+                                              .address_not_provided_please_call_the_client,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
                                   ],
                                 ),
@@ -478,7 +576,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 7),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -489,12 +588,14 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                     Text(
                                       S.of(context).phoneNumber,
                                       overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(context).textTheme.caption,
+                                      style:
+                                          Theme.of(context).textTheme.caption,
                                     ),
                                     Text(
                                       _con.order.user.phone,
                                       overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(context).textTheme.bodyText1,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
                                     ),
                                   ],
                                 ),
@@ -513,7 +614,9 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                     color: Theme.of(context).primaryColor,
                                     size: 24,
                                   ),
-                                  color: Theme.of(context).accentColor.withOpacity(0.9),
+                                  color: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(0.9),
                                   shape: StadiumBorder(),
                                 ),
                               ),
