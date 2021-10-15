@@ -586,6 +586,52 @@ class _OrderWidgetState extends StateMVC<OrderWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
+                                      'Número residencial',
+                                      overflow: TextOverflow.ellipsis,
+                                      style:
+                                          Theme.of(context).textTheme.caption,
+                                    ),
+                                    Text(
+                                      _con.order.deliveryAddress?.number ?? '-',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 20),
+                              SizedBox(
+                                width: 42,
+                                height: 42,
+//                                child: FlatButton(
+//                                  padding: EdgeInsets.all(0),
+//                                  disabledColor: Theme.of(context).focusColor.withOpacity(0.4),
+//                                  onPressed: () {
+//                                    Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '3', param: _con.order));
+//                                  },
+//                                  child: Icon(
+//                                    Icons.directions,
+//                                    color: Theme.of(context).primaryColor,
+//                                    size: 24,
+//                                  ),
+//                                  color: Theme.of(context).accentColor.withOpacity(0.9),
+//                                  shape: StadiumBorder(),
+//                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 7),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
                                       S.of(context).phoneNumber,
                                       overflow: TextOverflow.ellipsis,
                                       style:
