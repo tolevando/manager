@@ -7,6 +7,8 @@ class Address {
   String description;
   String address;
   String number;
+  String bairro;
+  String complement;
   double latitude;
   double longitude;
   bool isDefault;
@@ -22,6 +24,8 @@ class Address {
           : null;
       address = jsonMap['address'] != null ? jsonMap['address'] : null;
       number = jsonMap['number'] != null ? jsonMap['number'] : null;
+      bairro = jsonMap['bairro'] != null ? jsonMap['bairro'] : null;
+      complement = jsonMap['complement'] != null ? jsonMap['complement'] : null;
       latitude = jsonMap['latitude'] != null ? jsonMap['latitude'] : null;
       longitude = jsonMap['longitude'] != null ? jsonMap['longitude'] : null;
       isDefault = jsonMap['is_default'] ?? false;
@@ -40,6 +44,8 @@ class Address {
     map["description"] = description;
     map["address"] = address;
     map["number"] = number;
+    map["bairro"] = bairro;
+    map["complement"] = complement;
     map["latitude"] = latitude;
     map["longitude"] = longitude;
     map["is_default"] = isDefault;
