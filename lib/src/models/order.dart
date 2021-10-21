@@ -26,18 +26,36 @@ class Order {
     try {
       id = jsonMap['id'].toString();
       tax = jsonMap['tax'] != null ? jsonMap['tax'].toDouble() : 0.0;
-      deliveryFee = jsonMap['delivery_fee'] != null ? jsonMap['delivery_fee'].toDouble() : 0.0;
+      deliveryFee = jsonMap['delivery_fee'] != null
+          ? jsonMap['delivery_fee'].toDouble()
+          : 0.0;
       hint = jsonMap['hint'] != null ? jsonMap['hint'].toString() : '';
       active = jsonMap['active'] ?? false;
-      orderStatus = jsonMap['order_status'] != null ? OrderStatus.fromJSON(jsonMap['order_status']) : OrderStatus.fromJSON({});
+      orderStatus = jsonMap['order_status'] != null
+          ? OrderStatus.fromJSON(jsonMap['order_status'])
+          : OrderStatus.fromJSON({});
       dateTime = DateTime.parse(jsonMap['updated_at']);
-      user = jsonMap['user'] != null ? User.fromJSON(jsonMap['user']) : User.fromJSON({});
-      driver = jsonMap['driver'] != null ? User.fromJSON(jsonMap['driver']) : User.fromJSON({});
-      deliveryAddress = jsonMap['delivery_address'] != null ? Address.fromJSON(jsonMap['delivery_address']) : Address.fromJSON({});
-      payment = jsonMap['payment'] != null ? Payment.fromJSON(jsonMap['payment']) : Payment.fromJSON({});
-      productOrders = jsonMap['product_orders'] != null ? List.from(jsonMap['product_orders']).map((element) => ProductOrder.fromJSON(element)).toList() : [];
-      observacao = jsonMap['observacao'] != null ? jsonMap['observacao'].toString() : '';
-      troco_para = jsonMap['troco_para'] != null ? jsonMap['troco_para'].toString() : '';
+      user = jsonMap['user'] != null
+          ? User.fromJSON(jsonMap['user'])
+          : User.fromJSON({});
+      driver = jsonMap['driver'] != null
+          ? User.fromJSON(jsonMap['driver'])
+          : User.fromJSON({});
+      deliveryAddress = jsonMap['delivery_address'] != null
+          ? Address.fromJSON(jsonMap['delivery_address'])
+          : Address.fromJSON({});
+      payment = jsonMap['payment'] != null
+          ? Payment.fromJSON(jsonMap['payment'])
+          : Payment.fromJSON({});
+      productOrders = jsonMap['product_orders'] != null
+          ? List.from(jsonMap['product_orders'])
+              .map((element) => ProductOrder.fromJSON(element))
+              .toList()
+          : [];
+      observacao =
+          jsonMap['observacao'] != null ? jsonMap['observacao'].toString() : '';
+      troco_para =
+          jsonMap['troco_para'] != null ? jsonMap['troco_para'].toString() : '';
     } catch (e) {
       id = '';
       tax = 0.0;
@@ -64,14 +82,15 @@ class Order {
     map["tax"] = tax;
     map['hint'] = hint;
     map["delivery_fee"] = deliveryFee;
-    map["products"] = productOrders?.map((element) => element.toMap())?.toList();
+    map["products"] =
+        productOrders?.map((element) => element.toMap())?.toList();
     map["payment"] = payment?.toMap();
     if (!deliveryAddress.isUnknown()) {
       map["delivery_address_id"] = deliveryAddress?.id;
     }
     map['observacao'] = observacao;
     map['troco_para'] = troco_para;
-    
+
     return map;
   }
 
@@ -92,15 +111,18 @@ class Order {
   Map cancelMap() {
     var map = new Map<String, dynamic>();
     map["id"] = id;
-    if (orderStatus?.id != null && orderStatus?.id == '1') map["active"] = false;
+    if (orderStatus?.id != null && orderStatus?.id == '1')
+      map["active"] = false;
     return map;
   }
 
   bool canCancelOrder() {
-    return this.active == true && this.orderStatus.id == '1'; // 1 for order received status
+    return this.active == true &&
+        this.orderStatus.id == '1'; // 1 for order received status
   }
 
   bool canEditOrder() {
-    return this.active == true && this.orderStatus.id != '5'; // 5 for order delivered status
+    return this.active == true &&
+        this.orderStatus.id != '5'; // 5 for order delivered status
   }
 }

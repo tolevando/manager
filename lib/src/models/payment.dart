@@ -2,6 +2,7 @@ class Payment {
   String id;
   String status;
   String method;
+  int price;
 
   Payment.init();
 
@@ -12,10 +13,12 @@ class Payment {
       id = jsonMap['id'].toString();
       status = jsonMap['status'] ?? '';
       method = jsonMap['method'] ?? '';
+      price = jsonMap['price'] ?? 0;
     } catch (e) {
       id = '';
       status = '';
       method = '';
+      price = 0;
       print(e);
     }
   }
@@ -25,6 +28,7 @@ class Payment {
       'id': id,
       'status': status,
       'method': method,
+      'price': price,
     };
   }
 }

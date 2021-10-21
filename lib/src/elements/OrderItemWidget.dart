@@ -123,6 +123,24 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                               children: <Widget>[
                                 Expanded(
                                   child: Text(
+                                    'Valor cupom de desconto',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                ),
+                                Helper.getPrice(
+                                    Helper.getDiscountTotalOrdersPrice(
+                                        widget.order),
+                                    context,
+                                    style:
+                                        Theme.of(context).textTheme.subtitle1)
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(
                                     S.of(context).total,
                                     style:
                                         Theme.of(context).textTheme.bodyText1,

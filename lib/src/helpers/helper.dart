@@ -251,6 +251,7 @@ class Helper {
 
   static double getTotalOrdersPrice(Order order) {
     double total = 0;
+    double discount = 0;
     order.productOrders.forEach((productOrder) {
       switch (productOrder.product.option_mid_pizza) {
         case '0': //NÃO OFERECE OPÇÃO PIZZA MEIO A MEIO
@@ -282,7 +283,52 @@ class Helper {
 
     total += order.deliveryFee;
     total += order.tax * total / 100;
+
+    discount = total - order.payment.price.toDouble();
+
+    total = total - discount;
+
     return total;
+  }
+
+  static double getDiscountTotalOrdersPrice(Order order) {
+    double total = 0;
+    double discount = 0;
+    order.productOrders.forEach((productOrder) {
+      switch (productOrder.product.option_mid_pizza) {
+        case '0': //NÃO OFERECE OPÇÃO PIZZA MEIO A MEIO
+          print("NÃO OFERECE OPÇÃO PIZZA MEIO A MEIO");
+          // productOrder.options.forEach((option) {
+          //   total += option.price != null ? option.price : 0;
+          // });
+          total += getTotalOrderPrice(productOrder);
+          break;
+        case '1': //COBRA VALOR MEDIO OPÇÃO PIZZA MEIO A MEIO
+          print("COBRAR VALOR MÉDIO OPÇÃO PIZZA MEIO A MEIO");
+          total = productOrder.price;
+          total *= productOrder.quantity;
+          break;
+        case '2': //COBRA VALOR MAIOR OPÇÃO PIZZA MEIO A MEIO
+          print("COBRAR VALOR MAIOR OPÇÃO PIZZA MEIO A MEIO");
+          total = productOrder.price;
+          total *= productOrder.quantity;
+          break;
+        default:
+          print("COBRAR VALOR DEFAULT");
+          // productOrder.options.forEach((option) {
+          //   total += option.price != null ? option.price : 0;
+          // });
+          total += getTotalOrderPrice(productOrder);
+          break;
+      }
+    });
+
+    total += order.deliveryFee;
+    total += order.tax * total / 100;
+
+    discount = total - order.payment.price.toDouble();
+
+    return discount;
   }
 
   static double getSubTotalOrdersPrice(Order order) {
@@ -316,6 +362,7 @@ class Helper {
       }
       // total += getTotalOrderPrice(productOrder);
     });
+
     return total;
   }
 

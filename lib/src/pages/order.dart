@@ -88,7 +88,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget>
               ),
             )
           : Container(
-              height: _con.order.orderStatus.id == '5' ? 190 : 240,
+              height: _con.order.orderStatus.id == '5' ? 230 : 280,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
@@ -142,6 +142,20 @@ class _OrderWidgetState extends StateMVC<OrderWidget>
                           ),
                         ),
                         Helper.getPrice(Helper.getTaxOrder(_con.order), context,
+                            style: Theme.of(context).textTheme.subtitle1)
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            'Valor cupom de desconto',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                        Helper.getPrice(
+                            Helper.getDiscountTotalOrdersPrice(_con.order),
+                            context,
                             style: Theme.of(context).textTheme.subtitle1)
                       ],
                     ),
