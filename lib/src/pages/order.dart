@@ -303,7 +303,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget>
                       labelColor: Theme.of(context).accentColor),
                 ],
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                expandedHeight: 245,
+                expandedHeight: 260,
                 elevation: 0,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
@@ -379,6 +379,20 @@ class _OrderWidgetState extends StateMVC<OrderWidget>
                                     maxLines: 2,
                                     style: Theme.of(context).textTheme.caption,
                                   ),
+                                  _con.order.payment?.method ==
+                                              'Cartão de Crédito na Entrega' ||
+                                          _con.order.payment?.method ==
+                                              'Cartão de Débito na Entrega'
+                                      ? Text(
+                                          "Bandeira do Cartão: " +
+                                              _con.order?.card_brand,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .caption,
+                                        )
+                                      : SizedBox(width: 0),
                                   Text(
                                     "Troco para: " + _con.order.troco_para ??
                                         '-',

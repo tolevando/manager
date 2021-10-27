@@ -19,6 +19,7 @@ class Order {
   Address deliveryAddress;
   String observacao;
   String troco_para;
+  String card_brand;
 
   Order();
 
@@ -56,6 +57,8 @@ class Order {
           jsonMap['observacao'] != null ? jsonMap['observacao'].toString() : '';
       troco_para =
           jsonMap['troco_para'] != null ? jsonMap['troco_para'].toString() : '';
+      card_brand =
+          jsonMap['card_brand'] != null ? jsonMap['card_brand'].toString() : '';
     } catch (e) {
       id = '';
       tax = 0.0;
@@ -71,6 +74,7 @@ class Order {
       print(jsonMap);
       observacao = '';
       troco_para = '';
+      card_brand = '';
     }
   }
 
@@ -90,6 +94,7 @@ class Order {
     }
     map['observacao'] = observacao;
     map['troco_para'] = troco_para;
+    map['card_brand'] = card_brand;
 
     return map;
   }
