@@ -196,10 +196,78 @@ class Helper {
     }
   }
 
+  static Widget getPriceMinimum(double myPrice, BuildContext context,
+      {TextStyle style}) {
+    if (style != null) {
+      style = style.merge(TextStyle(fontSize: style.fontSize + 2));
+    }
+    try {
+      if (myPrice == 0) {
+        return Text('-', style: style ?? Theme.of(context).textTheme.subtitle1);
+      }
+      return RichText(
+        softWrap: false,
+        overflow: TextOverflow.fade,
+        maxLines: 1,
+        text: setting.value?.currencyRight != null &&
+                setting.value?.currencyRight == false
+            ? TextSpan(
+                text: '-' + setting.value?.defaultCurrency,
+                style: style == null
+                    ? Theme.of(context).textTheme.subtitle1.merge(
+                          TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1
+                                      .fontSize -
+                                  6),
+                        )
+                    : style.merge(TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: style.fontSize - 6)),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: myPrice.toStringAsFixed(
+                              setting.value?.currencyDecimalDigits) ??
+                          '',
+                      style: style ?? Theme.of(context).textTheme.subtitle1),
+                ],
+              )
+            : TextSpan(
+                text: myPrice.toStringAsFixed(
+                        setting.value?.currencyDecimalDigits) ??
+                    '',
+                style: style ?? Theme.of(context).textTheme.subtitle1,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: setting.value?.defaultCurrency,
+                    style: style == null
+                        ? Theme.of(context).textTheme.subtitle1.merge(
+                              TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          .fontSize -
+                                      6),
+                            )
+                        : style.merge(TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: style.fontSize - 6)),
+                  ),
+                ],
+              ),
+      );
+    } catch (e) {
+      return Text('');
+    }
+  }
+
   static double getTotalOrderPrice(ProductOrder productOrder) {
     double total = productOrder.price;
     productOrder.options.forEach((option) {
-      total += option.price != null ? option.price : 0;
+      // total += option.price != null ? option.price : 0;
     });
     total *= productOrder.quantity;
     return total;
@@ -219,9 +287,9 @@ class Helper {
     switch (productOrder.product.option_mid_pizza) {
       case '0': //NÃO OFERECE OPÇÃO PIZZA MEIO A MEIO
         print("NÃO OFERECE OPÇÃO PIZZA MEIO A MEIO");
-        productOrder.options.forEach((option) {
-          total += option.price != null ? option.price : 0;
-        });
+        // productOrder.options.forEach((option) {
+        //   total += option.price != null ? option.price : 0;
+        // });
         break;
       case '1': //COBRA VALOR MEDIO OPÇÃO PIZZA MEIO A MEIO
         print("COBRAR VALOR MÉDIO OPÇÃO PIZZA MEIO A MEIO");
@@ -233,9 +301,9 @@ class Helper {
         break;
       default:
         print("COBRAR VALOR DEFAULT");
-        productOrder.options.forEach((option) {
-          total += option.price != null ? option.price : 0;
-        });
+        // productOrder.options.forEach((option) {
+        //   total += option.price != null ? option.price : 0;
+        // });
         break;
     }
     return total;
@@ -284,7 +352,7 @@ class Helper {
     total += order.deliveryFee;
     total += order.tax * total / 100;
 
-    discount = total - order.payment.price.toDouble();
+    discount = total - order.orderPaymentPrice.toDouble();
 
     total = total - discount;
 
@@ -298,6 +366,7 @@ class Helper {
       switch (productOrder.product.option_mid_pizza) {
         case '0': //NÃO OFERECE OPÇÃO PIZZA MEIO A MEIO
           print("NÃO OFERECE OPÇÃO PIZZA MEIO A MEIO");
+
           // productOrder.options.forEach((option) {
           //   total += option.price != null ? option.price : 0;
           // });
@@ -326,7 +395,7 @@ class Helper {
     total += order.deliveryFee;
     total += order.tax * total / 100;
 
-    discount = total - order.payment.price.toDouble();
+    discount = total - order.orderPaymentPrice.toDouble();
 
     return discount;
   }

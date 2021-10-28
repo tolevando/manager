@@ -20,6 +20,8 @@ class Order {
   String observacao;
   String troco_para;
   String card_brand;
+  double orderPaymentPrice;
+  String methodPayment;
 
   Order();
 
@@ -59,6 +61,12 @@ class Order {
           jsonMap['troco_para'] != null ? jsonMap['troco_para'].toString() : '';
       card_brand =
           jsonMap['card_brand'] != null ? jsonMap['card_brand'].toString() : '';
+      orderPaymentPrice = jsonMap['payment']['price'] != null
+          ? jsonMap['payment']['price'].toDouble()
+          : 0.0;
+      methodPayment = jsonMap['payment']['method'] != null
+          ? jsonMap['payment']['method'].toString()
+          : '';
     } catch (e) {
       id = '';
       tax = 0.0;
@@ -75,6 +83,8 @@ class Order {
       observacao = '';
       troco_para = '';
       card_brand = '';
+      orderPaymentPrice = 0.0;
+      methodPayment = '';
     }
   }
 
@@ -95,6 +105,8 @@ class Order {
     map['observacao'] = observacao;
     map['troco_para'] = troco_para;
     map['card_brand'] = card_brand;
+    map["payment"]["price"] = orderPaymentPrice;
+    map["payment"]["method"] = methodPayment;
 
     return map;
   }

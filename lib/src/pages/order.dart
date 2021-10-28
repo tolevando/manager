@@ -153,7 +153,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget>
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
-                        Helper.getPrice(
+                        Helper.getPriceMinimum(
                             Helper.getDiscountTotalOrdersPrice(_con.order),
                             context,
                             style: Theme.of(context).textTheme.subtitle1)
@@ -379,9 +379,9 @@ class _OrderWidgetState extends StateMVC<OrderWidget>
                                     maxLines: 2,
                                     style: Theme.of(context).textTheme.caption,
                                   ),
-                                  _con.order.payment?.method ==
+                                  _con.order.methodPayment ==
                                               'Cartão de Crédito na Entrega' ||
-                                          _con.order.payment?.method ==
+                                          _con.order.methodPayment ==
                                               'Cartão de Débito na Entrega'
                                       ? Text(
                                           "Bandeira do Cartão: " +

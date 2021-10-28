@@ -128,7 +128,7 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                                         Theme.of(context).textTheme.bodyText1,
                                   ),
                                 ),
-                                Helper.getPrice(
+                                Helper.getPriceMinimum(
                                     Helper.getDiscountTotalOrdersPrice(
                                         widget.order),
                                     context,
